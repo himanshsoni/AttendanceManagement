@@ -58,3 +58,14 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect("/login")
+
+def attendence(request):
+    import pandas as pd
+    df_marks = pd.DataFrame({'Name': ['Aayush', 'Himansh', 'Priyesh', 'Siddharth']
+     })
+
+    #render dataframe as htm
+    #write html to file
+    #return HttpResponse('This is my student')
+    context = {'table' :df_marks['Name']}
+    return render(request,'attendence.html',context)
