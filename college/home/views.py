@@ -1,6 +1,9 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
+import random
+import mysql.connector
+import pandas as pd
 
 
 # Create your views here.
@@ -60,12 +63,15 @@ def logoutUser(request):
     return redirect("/login")
 
 def attendence(request):
-    import pandas as pd
-    df_marks = pd.DataFrame({'Name': ['Aayush', 'Himansh', 'Priyesh', 'Siddharth']
-     })
-
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="aayush",
+        database="second_year")
+    mycursor = mydb.cursor()
+    df = pd.read_sql_query("select * from maths;", mydb)
     #render dataframe as htm
     #write html to file
     #return HttpResponse('This is my student')
-    context = {'table' :df_marks['Name']}
+    context = {'table' :df['Name']}
     return render(request,'attendence.html',context)
