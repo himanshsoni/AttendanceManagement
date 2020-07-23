@@ -2,8 +2,9 @@ from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
 import random
-import mysql.connector
+from .models import Maths
 import pandas as pd
+
 
 
 # Create your views here.
@@ -47,7 +48,7 @@ def loginUser(request):
                 return redirect("/admin",)
             elif user_type == "faculty":
                 login(request, user)
-                return redirect("/faculty")
+                return redirect("/facultyattendence")
             elif user_type == "student":
                 login(request, user)
                 return redirect("/student")
@@ -63,15 +64,10 @@ def logoutUser(request):
     return redirect("/login")
 
 def attendence(request):
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="aayush",
-        database="second_year")
-    mycursor = mydb.cursor()
-    df = pd.read_sql_query("select * from maths;", mydb)
+    obj = Maths.objects.all()
     #render dataframe as htm
     #write html to file
     #return HttpResponse('This is my student')
-    context = {'table' :df['Name']}
-    return render(request,'attendence.html',context)
+    df = pd.DataFrame(obj.values())
+    context = {'table' :df['name']}
+    return render(request,'faculty_attendence.html',context)
