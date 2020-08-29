@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Attendence</title>
+	<style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: -ms-flexbox;
+            //display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-bottom: 40px;
+            background-color: #f5f5f5;
+        }
+		table{
+		background-color:#ffffff;
+		border: 1px solid black;
+		font-size:20px;
+		margin-top:100px;
+		text-align:center;
+		}
+		th{
+		text-align:center;
+		padding:5px;
+		border: 1px solid black;
+		}
+		td{
+		text-align:center;
+		padding:7px;
+		border: 1px solid black;
+		}
+		input{
+		width:40px;
+		height:30px;
+		text-transform:uppercase;
+		text-align:center;
+		}
+		</style>
+  </head>
+  <body>
+  <div style="background-color:#1c1c1c;padding-top:5px;padding-bottom:5px;padding-left:5px;">
+	<a href="/facultyattendence">
+		<img src="/static/logo.png" alt="Techno India NJR" style="height:50px;">
+	</a>
+	<a href="/facultyattendence">
+		<span style="color:white;font-size:35px;padding-left:300px;font-family:Copperplate;">Faculty Portal</span>
+	</a>
+	<a href="/about">
+		<span style="color:white;font-size:20px;padding-left:381px;font-family:Times;">About</span>
+	</a>
+	</div>
+	<center>
+	<form method="post" action="/attendencetaken">{% csrf_token %}
+		<table>
+			<tr>
+				<th style="text-align:center;">Roll No.</th>
+				<th style="text-align:center;">Firstname</th>
+				<th style="text-align:center;">Attendence</th>
+			</tr>
+		  {% for r,n in table%}
+		  <tr>
+			<td>{{r}}</td>
+			<td>{{n}}</td>
+			<td><input style="" name={{r}}></input></td>
+		   </tr>
+		  {%endfor%}
+		</table>
+		<button style="background:#34ff30;width:90px;height:40px;margin-top:30px;margin-bottom:30px;border-radius:10px;" type="submit" >
+			<span style="color:white;font-size:22px;font-family:arial;font-style:bold;">Done</span>
+		</button>
+	</form>
+	<center>
+</body>
+</html>

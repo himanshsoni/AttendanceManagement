@@ -118,12 +118,21 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Maths(models.Model):
-    #id = models.IntegerField()
-    roll_no = models.CharField(primary_key=True,max_length=12, blank=True, null=False)
+class Toc(models.Model):
+    roll_no = models.CharField(primary_key=True, max_length=12)
     name = models.CharField(max_length=32, blank=True, null=True)
-    attendence = models.CharField(max_length=1, blank=True, null=True)
+    august_29_2020 = models.CharField(db_column='August_29_2020', max_length=1, blank=True, null=True)  # Field name made lowercase.
+    august_30_2020 = models.CharField(db_column='August_30_2020', max_length=1, blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'maths'
+        db_table = 'toc'
+
+
+class Users(models.Model):
+    user = models.CharField(primary_key=True, max_length=32)
+    uer_type = models.CharField(max_length=10, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'users'

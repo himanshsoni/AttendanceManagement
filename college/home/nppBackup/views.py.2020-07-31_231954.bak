@@ -1,0 +1,97 @@
+from django.shortcuts import render,HttpResponse,redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import logout, authenticate, login
+import random
+from .models import Maths
+import pandas as pd
+from django.http import FileResponse
+
+
+
+# Create your views here.
+def loginpage(request):
+#    #return HttpResponse('This is my homepage')
+        return redirect("/login")
+
+#def demo(request):
+ #  if request.user_type == "admin":
+  #       return render(request,'about.html')
+   #if user_type == "student":
+    #return HttpResponse('This is my student')
+    #    return render(request,'student.html')
+   #if request.user_type == "faculty":
+    #return HttpResponse('This is my faculty')             
+    #     return render(request,'faculty.html')
+     
+        
+def about(request):
+    #return HttpResponse('This is my about')
+    return render(request,'about.html')
+def student_attendence(request):
+    obj = Maths.objects.all()
+    df = pd.DataFrame(obj.values())
+    table = []
+    for i in range(len(df)):
+        table.append((df['roll_no'].iloc[i],df['name'].iloc[i],df['attendence'].iloc[i]))
+    context = {'table' :table}
+    return render(request,'student_attendence.html',context)
+def loginUser(request):
+    if request.method=="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user_type = request.POST.get('user_type')
+        context={'username':username}
+        # check if user has entered correct credentials
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            # A backend authenticated the credentials
+            if user_type == "admin":
+                #login(request, user)
+                return redirect("/admin",)
+            elif user_type == "faculty":
+                login(request, user)
+                return redirect("/facultyattendence")
+            elif user_type == "student":
+                login(request, user)
+                return redirect("/studentattendence")
+
+        else:
+            context={'error':'Wrong username or password !'}
+            return render(request, 'login.html',context)
+
+    return render(request, 'login.html')
+
+def logoutUser(request):
+    logout(request)
+    return redirect("/login")
+
+def faculty_attendence(request):
+    obj = Maths.objects.all()
+    df = pd.DataFrame(obj.values())
+    table = []
+    for i in range(len(df)):
+        table.append((df['roll_no'].iloc[i],df['name'].iloc[i]))
+        
+    context = {'table' :table}
+    return render(request,'faculty_attendence.html',context)
+
+def attendence_taken(request):
+    #print(list(request.POST.values()))
+    obj = Maths.objects.values_list('roll_no')
+    att = list(request.POST.values())[1:]
+    roll = list(request.POST.keys())[1:]
+    for i in range(len(roll)):
+        if att[i]:
+            Maths.objects.filter(roll_no=roll[i]).update(attendence=att[i].upper())
+    return render(request,'attendence_taken.html')
+    
+def download(request):
+    path = "F:\Github\AttendanceManagement\college\home\Download.txt"
+    with open('F:\Github\AttendanceManagement\college\home\Download.txt', 'r') as pdf: 
+        print(pdf.read())
+        response =  HttpResponse(data = pdf.read().encode(), content_type='application/text charset=utf-8')
+        response["Content-Text"] = pdf.read()
+        response["Content-Length"] = len(pdf.read())
+        response['Content-Disposition'] = 'attachment;filename=Download.txt' 
+    #response = FileResponse(open("Download.txt", 'rb'))
+    return response
