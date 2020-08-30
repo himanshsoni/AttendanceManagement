@@ -19,8 +19,8 @@
 			text-align:center;
 		}
 		th{
-			height:45px;
-			width:80px;
+			height:20%;
+			width:30%;
 			text-align:center;
 			border: 1px solid black;
 		}
@@ -44,14 +44,14 @@
   <div class="container" style="width:auto">
 	<div class="row" style="background-color:#1c1c1c;height:75px;">
 		<div class="col-xs-4 col-md-4 col-sm-1">
-			<a href="/facultyattendence">
+			<a href="https://technonjr.org/">
 				<img src="/static/logo.png" alt="Techno India NJR" style="width:340px;height:65px;margin-top:5px;">
 			</a>
 		</div>
 		<div class="col-xs-4 col-md-4 col-sm-1">
 			<center>
 			<div style="margin-top:15px;">
-				<a href="/facultyattendence">
+				<a href="/studentattendence">
 					<span style="color:white;font-size:30px;">Student Portal</span>
 				</a>
 			</div>
@@ -60,7 +60,7 @@
 		<div class="col-xs-4 col-md-4 col-sm-1">
 			<center>
 			<div style="margin-top:25px;text-align:right;">
-				<a href="/facultyattendence">
+				<a href="/studentattendence">
 					<span style="color:white;">{{username}}</span>
 				</a>
 			</div>
@@ -69,11 +69,7 @@
 	</div>
 	<div class="row">
 		<center>
-		<a href="/download" >
-		<button style="background:#34ff30;width:25%;margin-top:30px;margin-bottom:10px;border-radius:10px;" type="submit" >
-			<span style="color:white;font-size:150%;font-family:arial;font-style:bold;">Download Full Attendence</span>
-		</button>
-		</a>
+			<label style = "font-size:180%;font-weight:6;margin-top:5%;"> Attendence Report : </label>
 		</center>
 	</div>
 	<div class="row">
@@ -82,21 +78,28 @@
 		<form method="post" action="/attendencetaken">{% csrf_token %}
 		<table>
 			<tr>
-				<th style="text-align:center;">Roll No.</th>
-				<th style="text-align:center;">Student Name</th>
-				<th style="text-align:center;width:34%;">{{date}}</th>
+				<th style="text-align:center;">Subjects</th>
+				<th style="text-align:center;">Attendence (%)</th>
 			</tr>
-			{% for r,n,a in table%}
+			{% for subject,percentage in attendences.items %}
 			<tr>
-				<td>{{r}}</td>
-				<td>{{n}}</td>
-				<td>{{a}}</td>
+				<td>{{subject | upper}}</td>
+				<td>{{percentage}}</td>
 			</tr>
 			{%endfor%}
 		</table>
 		</form>
 		<center>
 		</div>
+	</div>
+	<div class="row">
+		<center>
+		<a href="/studentdownload" >
+		<button style="background:#34ff30;width:25%;margin-top:2%;margin-bottom:10px;border-radius:10px;" type="submit" >
+			<span style="color:white;font-size:150%;font-family:arial;font-style:bold;">Download Full Attendence</span>
+		</button>
+		</a>
+		</center>
 	</div>
   </div>
   </body>
