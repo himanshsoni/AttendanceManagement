@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Attendence</title>
+	<style>
+        body {
+            background-color: #f5f5f5;
+        }
+		table{
+			background-color:#ffffff;
+			border: 1px solid black;
+			margin-top:5%;
+			text-align:center;
+		}
+		th{
+			height:45px;
+			width:80px;
+			text-align:center;
+			border: 1px solid black;
+		}
+		td{
+			
+			font-size:auto%;
+			text-align:center;
+			padding-top:1%;
+			padding-bottom:1%;
+			border: 1px solid black;
+		}
+		input{
+			width:35%;
+			height:100%
+			text-transform:uppercase;
+			text-align:center;
+		}
+		</style>
+  </head>
+  <body>
+  <div class="container" style="width:auto">
+	<div class="row" style="background-color:#1c1c1c;height:75px;">
+		<div class="col-xs-4 col-md-4 col-sm-1">
+			<a href="/facultyattendence">
+				<img src="/static/logo.png" alt="Techno India NJR" style="width:340px;height:60px;margin-top:5px;">
+			</a>
+		</div>
+		<div class="col-xs-4 col-md-4 col-sm-1">
+			<center>
+			<div style="margin-top:15px;">
+				<a href="/facultyattendence">
+					<span style="color:white;font-size:30px;">Faculty Portal</span>
+				</a>
+			</div>
+			</center>
+		</div>
+		<div class="col-xs-4 col-md-4 col-sm-1">
+			<center>
+			<a href="/about">
+				<span style="color:white;font-family:Times;">About</span>
+			</a>
+			</center>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-sm-12">
+		<center>
+		<form method="post" action="/attendencetaken">{% csrf_token %}
+		<table>
+			<tr>
+				<th style="text-align:center;">Roll No.</th>
+				<th style="text-align:center;">Firstname</th>
+				<th style="text-align:center;">
+						<input name='ip_date' type='date' value={{date}} style="width:130px;"></input>
+				</th>
+			</tr>
+		  {% for r,n in table%}
+		  <tr>
+			<td>{{r}}</td>
+			<td>{{n}}</td>
+			<td><input style="" name={{r}}></input></td>
+		   </tr>
+		  {%endfor%}
+		</table>
+		<button style="background:#34ff30;width:90px;height:40px;margin-top:30px;margin-bottom:30px;border-radius:10px;" type="submit" >
+			<span style="color:white;font-size:22px;font-family:arial;font-style:bold;">Done</span>
+		</button>
+		</form>
+		<center>
+		</div>
+	</div>
+  </div>
+  </body>
+</html>
