@@ -10,7 +10,7 @@ import pandas as pd
 from .models import Toc
 
 
-
+#Database Connection
 mydb = sql.connect(user='root',password='aayush',database='second_year')    
 cursor = mydb.cursor()
 
