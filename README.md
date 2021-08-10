@@ -4,6 +4,10 @@ And students will be able to view their whole atttendance report.
 Both teachers and students can even download the attendence as well as reports.
 
 ![Alt text](./SS/ss1.jpeg?raw=true "Title")
+
 ![Alt text](./SS/ss2.jpeg?raw=true "Title")
+
 ![Alt text](./SS/ss3.jpeg?raw=true "Title")
+
+
 ![Alt text](./SS/ss4.jpeg?raw=true "Title")
