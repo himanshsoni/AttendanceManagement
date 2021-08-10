@@ -5,7 +5,11 @@ Both teachers and students can even download the attendence as well as reports.
 
 ![Alt text](./SS/ss1.jpeg?raw=true "Title")
 
+
+
 ![Alt text](./SS/ss2.jpeg?raw=true "Title")
+
+
 
 ![Alt text](./SS/ss3.jpeg?raw=true "Title")
 
